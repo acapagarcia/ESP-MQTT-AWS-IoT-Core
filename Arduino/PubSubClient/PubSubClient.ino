@@ -20,7 +20,7 @@
 #endif
 
 const int MQTT_PORT = 8883;
-const char MQTT_SUB_TOPIC[] = "$aws/things/" THINGNAME "/shadow/update";
+const char MQTT_SUB_TOPIC[] = "$aws/things/" THINGNAME "/shadow/update/desired";
 const char MQTT_PUB_TOPIC[] = "$aws/things/" THINGNAME "/shadow/update";
 
 #ifdef USE_SUMMER_TIME_DST
@@ -183,7 +183,7 @@ void sendData(void)
 
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(9600);
   delay(5000);
   Serial.println();
   Serial.println();
@@ -225,7 +225,7 @@ void loop()
   else
   {
     client.loop();
-    if (millis() - lastMillis > 5000)
+    if (millis() - lastMillis > 50000)
     {
       lastMillis = millis();
       sendData();
